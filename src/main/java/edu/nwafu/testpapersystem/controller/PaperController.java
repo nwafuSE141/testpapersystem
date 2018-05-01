@@ -1,11 +1,11 @@
 package edu.nwafu.testpapersystem.controller;
 
 import com.alibaba.fastjson.JSON;
+import edu.nwafu.testpapersystem.domain.entity.PageBean;
+import edu.nwafu.testpapersystem.domain.entity.Paper;
 import edu.nwafu.testpapersystem.service.PaperService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,12 +21,23 @@ public class PaperController {
     @Autowired
     PaperService paperService;
 
-    @GetMapping("/listAllPaper")
-    public String listAllPaper(){
+    @PostMapping("/listAllPaper")
+    public PageBean listAllPaper(int currentPage, int pageSize){
 
-        List paperList = paperService.listAllPaper();
+        PageBean pageData = paperService.listAllPaper(currentPage, pageSize);
 
-        return JSON.toJSONString(paperList);
+        return pageData;
+    }
+
+    @PostMapping("/getPaperById")
+    public Paper getPaperById(int id){
+        //Paper paper = paperService.selectByPrimaryKey(id);
+        return null;
+    }
+
+    @PostMapping("/updatepaper")
+    public int updatePaper(Paper paper){
+        return paperService.updateByPrimaryKey(paper);
     }
 
 }
