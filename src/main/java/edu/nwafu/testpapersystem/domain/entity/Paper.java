@@ -110,4 +110,18 @@ public class Paper implements Serializable {
     public void setState(Integer state) {
         this.state = state;
     }
+
+    @Override
+    public String toString() {
+        return "Paper{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", courseId=" + courseId +
+                ", parameterId=" + parameterId +
+                ", creatorId=" + creatorId +
+                ", reviewerId=" + reviewerId +
+                ", createTime=" + createTime +
+                ", state=" + state +
+                '}';
+    }
 }
