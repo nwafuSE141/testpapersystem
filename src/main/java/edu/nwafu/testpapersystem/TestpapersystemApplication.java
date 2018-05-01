@@ -3,6 +3,8 @@ package edu.nwafu.testpapersystem;
 import com.github.pagehelper.PageHelper;
 import edu.nwafu.testpapersystem.Filter.LoginFilter;
 import org.mybatis.spring.annotation.MapperScan;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -13,8 +15,10 @@ import java.util.Properties;
 @SpringBootApplication
 @MapperScan("edu.nwafu.testpapersystem.domain.mapper")
 public class TestpapersystemApplication {
+    protected static final Logger logger = LoggerFactory.getLogger(TestpapersystemApplication.class);
 
 	public static void main(String[] args) {
+	    logger.info("start spring boot serve");
 		SpringApplication.run(TestpapersystemApplication.class, args);
 	}
 
@@ -28,7 +32,7 @@ public class TestpapersystemApplication {
 
     @Bean
     public PageHelper pageHelper(){
-        System.out.println("==============================开始配置数据分页插件");
+        logger.info("开始配置数据分页插件");
         PageHelper pageHelper = new PageHelper();
         Properties properties = new Properties();
         properties.setProperty("offsetAsPageNum","true");
