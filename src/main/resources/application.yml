@@ -1,18 +1,20 @@
 spring:
   datasource:
-    data: jdbc:mysql://10.1.2.22:3306/test_paper_system?useUnicode=true&characterEncoding=utf8
-    data-username: root
-    data-password: root
+    url: jdbc:mysql://localhost:3306/test_paper_system?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: root
     driver-class-name: com.mysql.jdbc.Driver
+
 mybatis:
   configuration:
     map-underscore-to-camel-case: true #驼峰命名法
     default-fetch-size: 50 #结果集数量
     default-statement-timeout: 10 #超时
     auto-mapping-unknown-column-behavior: warning #指定发现自动映射目标未知列（或者未知属性类型）的行为
-  mapper-locations: /edu/nwafu/testpapersystem/domain/mapper/*.xml
-  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mapping/*.xml
 
+file:
+  location: classpath:res
 
 
 server:

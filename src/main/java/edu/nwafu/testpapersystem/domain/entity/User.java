@@ -13,7 +13,7 @@ public class User implements Serializable {
     private Integer roleId;
 
     
-    private String passwor;
+    private String password;
 
     
     private String email;
@@ -55,13 +55,13 @@ public class User implements Serializable {
     }
 
     
-    public String getPasswor() {
-        return passwor;
+    public String getPassword() {
+        return password;
     }
 
     
     public void setPasswor(String passwor) {
-        this.passwor = passwor == null ? null : passwor.trim();
+        this.password = passwor == null ? null : passwor.trim();
     }
 
     

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.nwafu.testpapersystem.domain.mapper.ScoreMapper">
+  <resultMap id="BaseResultMap" type="edu.nwafu.testpapersystem.domain.entity.Score">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="stuid" jdbcType="INTEGER" property="stuid" />
+    <result column="classname" jdbcType="VARCHAR" property="classname" />
+    <result column="teacher" jdbcType="VARCHAR" property="teacher" />
+    <result column="pname" jdbcType="VARCHAR" property="pname" />
+    <result column="ptype" jdbcType="VARCHAR" property="ptype" />
+    <result column="test_number" jdbcType="INTEGER" property="testNumber" />
+    <result column="question_id" jdbcType="INTEGER" property="questionId" />
+    <result column="question_score" jdbcType="REAL" property="questionScore" />
+    <result column="had_score" jdbcType="REAL" property="hadScore" />
+    <result column="test_times" jdbcType="INTEGER" property="testTimes" />
+    <result column="test_time" jdbcType="INTEGER" property="testTime" />
+    <result column="knowledge_pointid" jdbcType="INTEGER" property="knowledgePointid" />
+    <result column="knowledge_pointname" jdbcType="VARCHAR" property="knowledgePointname" />
+    <result column="rate" jdbcType="DATE" property="rate" />
+  </resultMap>
+  <insert id="insert" parameterType="edu.nwafu.testpapersystem.domain.entity.Score">
+    insert into score (id, stuid, classname, 
+      teacher, pname, ptype, 
+      test_number, question_id, question_score, 
+      had_score, test_times, test_time, 
+      knowledge_pointid, knowledge_pointname, rate
+      )
+    values (#{id,jdbcType=INTEGER}, #{stuid,jdbcType=INTEGER}, #{classname,jdbcType=VARCHAR}, 
+      #{teacher,jdbcType=VARCHAR}, #{pname,jdbcType=VARCHAR}, #{ptype,jdbcType=VARCHAR}, 
+      #{testNumber,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER}, #{questionScore,jdbcType=REAL}, 
+      #{hadScore,jdbcType=REAL}, #{testTimes,jdbcType=INTEGER}, #{testTime,jdbcType=INTEGER}, 
+      #{knowledgePointid,jdbcType=INTEGER}, #{knowledgePointname,jdbcType=VARCHAR}, #{rate,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="edu.nwafu.testpapersystem.domain.entity.Score">
+    insert into score
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="stuid != null">
+        stuid,
+      </if>
+      <if test="classname != null">
+        classname,
+      </if>
+      <if test="teacher != null">
+        teacher,
+      </if>
+      <if test="pname != null">
+        pname,
+      </if>
+      <if test="ptype != null">
+        ptype,
+      </if>
+      <if test="testNumber != null">
+        test_number,
+      </if>
+      <if test="questionId != null">
+        question_id,
+      </if>
+      <if test="questionScore != null">
+        question_score,
+      </if>
+      <if test="hadScore != null">
+        had_score,
+      </if>
+      <if test="testTimes != null">
+        test_times,
+      </if>
+      <if test="testTime != null">
+        test_time,
+      </if>
+      <if test="knowledgePointid != null">
+        knowledge_pointid,
+      </if>
+      <if test="knowledgePointname != null">
+        knowledge_pointname,
+      </if>
+      <if test="rate != null">
+        rate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="stuid != null">
+        #{stuid,jdbcType=INTEGER},
+      </if>
+      <if test="classname != null">
+        #{classname,jdbcType=VARCHAR},
+      </if>
+      <if test="teacher != null">
+        #{teacher,jdbcType=VARCHAR},
+      </if>
+      <if test="pname != null">
+        #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="ptype != null">
+        #{ptype,jdbcType=VARCHAR},
+      </if>
+      <if test="testNumber != null">
+        #{testNumber,jdbcType=INTEGER},
+      </if>
+      <if test="questionId != null">
+        #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="questionScore != null">
+        #{questionScore,jdbcType=REAL},
+      </if>
+      <if test="hadScore != null">
+        #{hadScore,jdbcType=REAL},
+      </if>
+      <if test="testTimes != null">
+        #{testTimes,jdbcType=INTEGER},
+      </if>
+      <if test="testTime != null">
+        #{testTime,jdbcType=INTEGER},
+      </if>
+      <if test="knowledgePointid != null">
+        #{knowledgePointid,jdbcType=INTEGER},
+      </if>
+      <if test="knowledgePointname != null">
+        #{knowledgePointname,jdbcType=VARCHAR},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="findAvg" parameterType="java.util.Map" resultType="java.lang.Double">
+  SELECT avg(had_score)   FROM test_paper_system.score where pname=#{pname}
+  and test_number=#{test_number} and question_id=#{question_id} and stuid in
+    <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+   group by test_number
+
+  </select>
+</mapper>
