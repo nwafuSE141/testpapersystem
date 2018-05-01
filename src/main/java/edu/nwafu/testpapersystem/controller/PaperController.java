@@ -21,7 +21,7 @@ public class PaperController {
     @Autowired
     PaperService paperService;
 
-    @PostMapping("/listAllPaper")
+    @PostMapping("/listAll")
     public PageBean listAllPaper(int currentPage, int pageSize){
 
         PageBean pageData = paperService.listAllPaper(currentPage, pageSize);
@@ -29,15 +29,19 @@ public class PaperController {
         return pageData;
     }
 
-    @PostMapping("/getPaperById")
-    public Paper getPaperById(int id){
-        //Paper paper = paperService.selectByPrimaryKey(id);
-        return null;
+    @PostMapping("/getById")
+    public Paper getPaperById(Integer id){
+        Paper paper = paperService.selectByPrimaryKey(id);
+        return paper;
     }
 
-    @PostMapping("/updatepaper")
+    @PostMapping("/update")
     public int updatePaper(Paper paper){
         return paperService.updateByPrimaryKey(paper);
     }
 
+    @PostMapping("/delete")
+    public int deletePaperById(Integer id){
+        return paperService.deleteByPrimaryKey(id);
+    }
 }

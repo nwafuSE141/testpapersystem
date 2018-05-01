@@ -1,3 +1,7 @@
+server:
+  port: 8081
+  #context-path: /testpaper
+
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/test_paper_system?useUnicode=true&characterEncoding=utf8
@@ -15,8 +19,9 @@ mybatis:
 
 file:
   location: classpath:res
+logging:
+  level:
+    edu.nwafu.test_paper_system: debug
+  file: log\springboot.log
 
 
-server:
-  port: 8081
-  #context-path: /testpaper
