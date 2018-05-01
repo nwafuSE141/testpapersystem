@@ -1,13 +1,13 @@
 package edu.nwafu.testpapersystem.controller;
 
-import com.alibaba.fastjson.JSON;
 import edu.nwafu.testpapersystem.domain.entity.PageBean;
 import edu.nwafu.testpapersystem.domain.entity.Paper;
 import edu.nwafu.testpapersystem.service.PaperService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 /**
  * @author TinChiWay
@@ -17,6 +17,7 @@ import java.util.List;
 @RestController()
 @RequestMapping(value = "/paper")
 public class PaperController {
+    protected static final Logger logger = LoggerFactory.getLogger(PaperController.class);
 
     @Autowired
     PaperService paperService;
@@ -31,12 +32,14 @@ public class PaperController {
 
     @PostMapping("/getById")
     public Paper getPaperById(Integer id){
+        logger.info("get paper with id : " + id);
         Paper paper = paperService.selectByPrimaryKey(id);
         return paper;
     }
 
     @PostMapping("/update")
     public int updatePaper(Paper paper){
+        logger.info("updata paper with :" + paper);
         return paperService.updateByPrimaryKey(paper);
     }
 
