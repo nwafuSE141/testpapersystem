@@ -1,7 +1,9 @@
 package edu.nwafu.testpapersystem.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import edu.nwafu.testpapersystem.Base.BaseMapper;
 import edu.nwafu.testpapersystem.Base.Impl.BaseServiceImpl;
+import edu.nwafu.testpapersystem.domain.entity.PageBean;
 import edu.nwafu.testpapersystem.domain.entity.Paper;
 import edu.nwafu.testpapersystem.domain.mapper.PaperMapper;
 import edu.nwafu.testpapersystem.service.PaperService;
@@ -22,7 +24,10 @@ public class PaperServiceImpl extends BaseServiceImpl<Paper,Integer> implements 
     }
 
     @Override
-    public List<Paper> listAllPaper() {
-        return paperMapper.selectAll();
+    public PageBean<Paper> listAllPaper(int currentPage, int pageSize) {
+        PageHelper.startPage(currentPage,pageSize);
+        List result = paperMapper.selectAll();
+        return new PageBean<Paper>(result);
     }
+
 }
